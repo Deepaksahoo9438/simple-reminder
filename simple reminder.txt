@@ -1,0 +1,27 @@
+import datetime
+
+def set_daily_reminders():
+    activities = [
+        "Day of week",
+        "Wake up",
+        "Go to gym",
+        "Breakfast",
+        "Meeting",
+        "Lunch",
+        "Quick nap",
+        "Go to library",
+        "Dinner",
+        "Go to sleep"
+    ]
+
+    current_time = datetime.datetime.now()
+
+    for activity in activities:
+        reminder_time = datetime.datetime(current_time.year, current_time.month, current_time.day, 8, 0)  # Set initial time as 8:00 AM
+        reminder_time += datetime.timedelta(hours=activities.index(activity) * 2)  # Adjust time for each activity
+        if reminder_time < current_time:
+            reminder_time += datetime.timedelta(days=1)  # If the time has passed, set it for the next day
+        print(f"Reminder: {activity} at {reminder_time.strftime('%I:%M %p')}")
+
+if _name_ == "_main_":
+    set_daily_reminders()
